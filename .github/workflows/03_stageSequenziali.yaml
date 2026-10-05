@@ -20,28 +20,32 @@ jobs:
         run: |
           echo "Ciao, sono il primo job!" > file.txt
           echo "File scritto con successo!"
-        
+
       - name: Upload artefatto
         uses: actions/upload-artifact@v4
         with:
           name: generated-file
           path: file.txt
-  
+
   leggi-file:
     needs: scrivi-file
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifatto
+      - name: Download artefatto
         uses: actions/download-artifact@v4
         with:
           name: generated-file
 
-      - name: verifica esistenza file
-      - run: 
+      - name: Verifica esistenza file
+        run: |
           if [ -f "file.txt" ]; then
-            echo "file trovato"
+            echo "Il file esiste!"
           else
-            echo "file non trovato"
+            echo "Il file non esiste!"
             exit 1
           fi
+
+      - name: Lettura del file
+        run: |
+          cat file.txt
