@@ -1,0 +1,47 @@
+name: Stage sequenziali
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  scrivi-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: scrivi file
+        run: 
+          echo "ciao sono il primo job" > file.txt
+          echo "fiel scritto con successo"
+        
+      - name: Upload artefatto
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-file
+          path: file.txt
+  
+  leggi-file:
+    needs: scrivi-file
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifatto
+        uses: actions/download-artifact@v4
+          with:
+            name: generated-file
+
+      - name: verifica esistenza file
+      - run: 
+          if [ -f "file.txt" ]; then
+            echo "file trovato"
+          else
+            echo "file non trovato"
+            exit 1
+          fi
