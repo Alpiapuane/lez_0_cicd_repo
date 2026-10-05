@@ -34,8 +34,8 @@ jobs:
     steps:
       - name: Download artifatto
         uses: actions/download-artifact@v4
-          with:
-            name: generated-file
+        with:
+          name: generated-file
 
       - name: verifica esistenza file
       - run: 
