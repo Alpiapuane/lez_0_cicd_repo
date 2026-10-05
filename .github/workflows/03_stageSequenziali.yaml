@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: scrivi file
+      - name: Scrivi file
         run: |
           echo "Ciao, sono il primo job!" > file.txt
           echo "File scritto con successo!"
