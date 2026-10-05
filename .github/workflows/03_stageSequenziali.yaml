@@ -17,9 +17,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: scrivi file
-        run: 
-          echo "ciao sono il primo job" > file.txt
-          echo "fiel scritto con successo"
+        run: |
+          echo "Ciao, sono il primo job!" > file.txt
+          echo "File scritto con successo!"
         
       - name: Upload artefatto
         uses: actions/upload-artifact@v4
